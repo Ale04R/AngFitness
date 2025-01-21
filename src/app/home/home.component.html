@@ -1,22 +1,18 @@
-<h1 class="text-center my-5 display-4">La nostra Palestra</h1>
+<h1 class="text-center m-5">La nostra Palestra</h1>
 
-<div class="container my-5">
-    <h2 class="text-center mb-4">I tuoi corsi preferiti</h2>
+<div class="m-5 row">
+    <h2 class="text-center">I tuoi corsi preferiti</h2>
     @if(corsi() !== undefined){
         @if (corsi().length !== 0) {
-            <div class="row">
-                @for(corso of corsi(); track corso.id){
-                <div class="col-md-4 mb-4">
-                    <app-corso class="card-body" [corso]="corso"></app-corso>
-                </div>
-                }
+            @for(corso of corsi(); track corso.id){
+            <div class="col-4 m-auto">
+                <app-corso class="m-3" [corso]="corso"></app-corso>
             </div>
+            }        
         }@else {
-            <div class="text-center">
-                <a href="/corsi" class="btn btn-primary mt-4">
-                    <h3>Non hai corsi preferiti, vai ai nostri corsi</h3>
-                </a>
-            </div>
+            <a href="/corsi">
+                <h3>Non hai corsi preferiti vai ai nostri corsi</h3>
+            </a>
         }
     }
 </div>
