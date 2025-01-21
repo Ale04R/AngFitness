@@ -1,14 +1,12 @@
-<h1 class="text-center m-4">Benvenuti nella nostra palestra</h1>
+<h1 class="text-center m-5">La nostra Palestra</h1>
 
-<div id="card-list" class="row m-auto mb-4">
-    <div class="col-2">
-    </div>
-    <div class="col-4">
-        <app-corso></app-corso>
-    </div>
-    <div class="col-4">
-        <app-corso></app-corso>
-    </div>
-    <div class="col-2">
-    </div>
+<div class="m-5 row">
+    <h2 class="text-center">I tuoi corsi preferiti</h2>
+    @if(corsi() !== undefined){
+        @for(corso of corsi(); track corso.id){
+        <div class="col-4 m-auto">
+            <app-corso class="m-3" [corso]="corso"></app-corso>
+        </div>
+        }
+    }
 </div>

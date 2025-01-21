@@ -1,94 +1,160 @@
 {
-  "corsi": [
-    {
-      "id": 1,
-      "nome": "Corso di Yoga",
-      "descrizione": "Un corso rilassante di yoga per tutti i livelli.",
-      "istruttore": "Alice Rossi",
-      "durata": 60,
-      "capacitàMassima": 20,
-      "preferiti": true
-    },
-    {
-      "id": 2,
-      "nome": "Pilates",
-      "descrizione": "Migliora la tua postura e flessibilità.",
-      "istruttore": "Marco Bianchi",
-      "durata": 45,
-      "capacitàMassima": 15,
-      "preferiti": false
-    },
-    {
-      "id": 3,
-      "nome": "Zumba",
-      "descrizione": "Divertiti ballando e bruciando calorie.",
-      "istruttore": "Laura Verdi",
-      "durata": 50,
-      "capacitàMassima": 25,
-      "preferiti": true
-    },
-    {
-      "id": 4,
-      "nome": "CrossFit",
-      "descrizione": "Allenamento ad alta intensità per migliorare forza e resistenza.",
-      "istruttore": "Luca Neri",
-      "durata": 60,
-      "capacitàMassima": 10,
-      "preferiti": false
-    },
-    {
-      "id": 5,
-      "nome": "Boxe",
-      "descrizione": "Impara le tecniche di boxe e migliora la tua forma fisica.",
-      "istruttore": "Giulia Gialli",
-      "durata": 55,
-      "capacitàMassima": 12,
-      "preferiti": true
-    },
-    {
-      "id": 6,
-      "nome": "Spinning",
-      "descrizione": "Allenamento cardiovascolare su bici stazionaria.",
-      "istruttore": "Paolo Blu",
-      "durata": 45,
-      "capacitàMassima": 18,
-      "preferiti": false
-    },
-    {
-      "id": 7,
-      "nome": "HIIT",
-      "descrizione": "Allenamento ad intervalli ad alta intensità.",
-      "istruttore": "Sara Viola",
-      "durata": 30,
-      "capacitàMassima": 20,
-      "preferiti": true
-    },
-    {
-      "id": 8,
-      "nome": "Stretching",
-      "descrizione": "Migliora la tua flessibilità e rilassa i muscoli.",
-      "istruttore": "Andrea Rosa",
-      "durata": 40,
-      "capacitàMassima": 22,
-      "preferiti": false
-    },
-    {
-      "id": 9,
-      "nome": "Functional Training",
-      "descrizione": "Allenamento funzionale per migliorare la forza e la coordinazione.",
-      "istruttore": "Elena Marrone",
-      "durata": 50,
-      "capacitàMassima": 15,
-      "preferiti": true
-    },
-    {
-      "id": 10,
-      "nome": "Tai Chi",
-      "descrizione": "Arte marziale cinese per migliorare equilibrio e concentrazione.",
-      "istruttore": "Giorgio Grigio",
-      "durata": 60,
-      "capacitàMassima": 20,
-      "preferiti": false
-    }
-  ]
-}
+    "corsi": [
+      {
+        "id": "1",
+        "nome": "Yoga per Principianti",
+        "descrizione": "Un corso introduttivo per imparare le basi dello yoga e migliorare la flessibilità e la forza.",
+        "istruttore": {
+          "nome": "Anna Verdi",
+          "email": "anna.verdi@mail.com"
+        },
+        "durata": "8 settimane",
+        "capacitaMassima": 20
+      },
+      {
+        "id": "2",
+        "nome": "Pilates Avanzato",
+        "descrizione": "Perfeziona la tua tecnica di pilates con esercizi avanzati per il core e la postura.",
+        "istruttore": {
+          "nome": "Marco Bianchi",
+          "email": "marco.bianchi@mail.com"
+        },
+        "durata": "6 settimane",
+        "capacitaMassima": 15
+      },
+      {
+        "id": "3",
+        "nome": "Allenamento HIIT",
+        "descrizione": "Un corso di allenamento ad alta intensità per bruciare calorie e migliorare la resistenza.",
+        "istruttore": {
+          "nome": "Laura Rossi",
+          "email": "laura.rossi@mail.com"
+        },
+        "durata": "4 settimane",
+        "capacitaMassima": 25
+      },
+      {
+        "id": "4",
+        "nome": "Zumba Fitness",
+        "descrizione": "Un mix di danza e fitness per divertirsi e tenersi in forma.",
+        "istruttore": {
+          "nome": "Luca Gialli",
+          "email": "luca.gialli@mail.com"
+        },
+        "durata": "5 settimane",
+        "capacitaMassima": 30
+      },
+      {
+        "id": "5",
+        "nome": "CrossFit Essentials",
+        "descrizione": "Le basi del CrossFit per migliorare forza, resistenza e agilità.",
+        "istruttore": {
+          "nome": "Sofia Neri",
+          "email": "sofia.neri@mail.com"
+        },
+        "durata": "10 settimane",
+        "capacitaMassima": 20
+      },
+      {
+        "id": "6",
+        "nome": "Functional Training",
+        "descrizione": "Allenamento funzionale per migliorare la mobilità e la forza globale.",
+        "istruttore": {
+          "nome": "Giorgio Verdi",
+          "email": "giorgio.verdi@mail.com"
+        },
+        "durata": "7 settimane",
+        "capacitaMassima": 18
+      },
+      {
+        "id": "7",
+        "nome": "Stretching Avanzato",
+        "descrizione": "Tecniche di stretching avanzate per migliorare la flessibilità e prevenire infortuni.",
+        "istruttore": {
+          "nome": "Maria Neri",
+          "email": "maria.neri@mail.com"
+        },
+        "durata": "5 settimane",
+        "capacitaMassima": 12
+      },
+      {
+        "id": "8",
+        "nome": "Cardio Dance",
+        "descrizione": "Una combinazione di cardio e danza per un allenamento divertente e dinamico.",
+        "istruttore": {
+          "nome": "Elisa Bianchi",
+          "email": "elisa.bianchi@mail.com"
+        },
+        "durata": "6 settimane",
+        "capacitaMassima": 20
+      },
+      {
+        "id": "9",
+        "nome": "Bootcamp Outdoor",
+        "descrizione": "Allenamento all'aperto ad alta intensità per migliorare la resistenza e il tono muscolare.",
+        "istruttore": {
+          "nome": "Fabio Neri",
+          "email": "fabio.neri@mail.com"
+        },
+        "durata": "8 settimane",
+        "capacitaMassima": 15
+      },
+      {
+        "id": "10",
+        "nome": "Personal Training Online",
+        "descrizione": "Sessioni di personal training personalizzate da casa tua.",
+        "istruttore": {
+          "nome": "Simone Rossi",
+          "email": "simone.rossi@mail.com"
+        },
+        "durata": "10 settimane",
+        "capacitaMassima": 10
+      }
+    ],
+    "corsiPreferiti": [
+      {
+        "id": "1",
+        "nome": "Yoga per Principianti",
+        "descrizione": "Un corso introduttivo per imparare le basi dello yoga e migliorare la flessibilità e la forza.",
+        "istruttore": {
+          "nome": "Anna Verdi",
+          "email": "anna.verdi@mail.com"
+        },
+        "durata": "8 settimane",
+        "capacitaMassima": 20
+      },
+      {
+        "id": "3",
+        "nome": "Allenamento HIIT",
+        "descrizione": "Un corso di allenamento ad alta intensità per bruciare calorie e migliorare la resistenza.",
+        "istruttore": {
+          "nome": "Laura Rossi",
+          "email": "laura.rossi@mail.com"
+        },
+        "durata": "4 settimane",
+        "capacitaMassima": 25
+      },
+      {
+        "id": "4",
+        "nome": "Zumba Fitness",
+        "descrizione": "Un mix di danza e fitness per divertirsi e tenersi in forma.",
+        "istruttore": {
+          "nome": "Luca Gialli",
+          "email": "luca.gialli@mail.com"
+        },
+        "durata": "5 settimane",
+        "capacitaMassima": 30
+      },
+      {
+        "id": "9",
+        "nome": "Bootcamp Outdoor",
+        "descrizione": "Allenamento all'aperto ad alta intensità per migliorare la resistenza e il tono muscolare.",
+        "istruttore": {
+          "nome": "Fabio Neri",
+          "email": "fabio.neri@mail.com"
+        },
+        "durata": "8 settimane",
+        "capacitaMassima": 15
+      }
+    ]
+  }
