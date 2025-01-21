@@ -1,0 +1,94 @@
+{
+  "corsi": [
+    {
+      "id": 1,
+      "nome": "Corso di Yoga",
+      "descrizione": "Un corso rilassante di yoga per tutti i livelli.",
+      "istruttore": "Alice Rossi",
+      "durata": 60,
+      "capacitàMassima": 20,
+      "preferiti": true
+    },
+    {
+      "id": 2,
+      "nome": "Pilates",
+      "descrizione": "Migliora la tua postura e flessibilità.",
+      "istruttore": "Marco Bianchi",
+      "durata": 45,
+      "capacitàMassima": 15,
+      "preferiti": false
+    },
+    {
+      "id": 3,
+      "nome": "Zumba",
+      "descrizione": "Divertiti ballando e bruciando calorie.",
+      "istruttore": "Laura Verdi",
+      "durata": 50,
+      "capacitàMassima": 25,
+      "preferiti": true
+    },
+    {
+      "id": 4,
+      "nome": "CrossFit",
+      "descrizione": "Allenamento ad alta intensità per migliorare forza e resistenza.",
+      "istruttore": "Luca Neri",
+      "durata": 60,
+      "capacitàMassima": 10,
+      "preferiti": false
+    },
+    {
+      "id": 5,
+      "nome": "Boxe",
+      "descrizione": "Impara le tecniche di boxe e migliora la tua forma fisica.",
+      "istruttore": "Giulia Gialli",
+      "durata": 55,
+      "capacitàMassima": 12,
+      "preferiti": true
+    },
+    {
+      "id": 6,
+      "nome": "Spinning",
+      "descrizione": "Allenamento cardiovascolare su bici stazionaria.",
+      "istruttore": "Paolo Blu",
+      "durata": 45,
+      "capacitàMassima": 18,
+      "preferiti": false
+    },
+    {
+      "id": 7,
+      "nome": "HIIT",
+      "descrizione": "Allenamento ad intervalli ad alta intensità.",
+      "istruttore": "Sara Viola",
+      "durata": 30,
+      "capacitàMassima": 20,
+      "preferiti": true
+    },
+    {
+      "id": 8,
+      "nome": "Stretching",
+      "descrizione": "Migliora la tua flessibilità e rilassa i muscoli.",
+      "istruttore": "Andrea Rosa",
+      "durata": 40,
+      "capacitàMassima": 22,
+      "preferiti": false
+    },
+    {
+      "id": 9,
+      "nome": "Functional Training",
+      "descrizione": "Allenamento funzionale per migliorare la forza e la coordinazione.",
+      "istruttore": "Elena Marrone",
+      "durata": 50,
+      "capacitàMassima": 15,
+      "preferiti": true
+    },
+    {
+      "id": 10,
+      "nome": "Tai Chi",
+      "descrizione": "Arte marziale cinese per migliorare equilibrio e concentrazione.",
+      "istruttore": "Giorgio Grigio",
+      "durata": 60,
+      "capacitàMassima": 20,
+      "preferiti": false
+    }
+  ]
+}
