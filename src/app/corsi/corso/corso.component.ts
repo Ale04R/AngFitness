@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Corsi } from '../corsi.modal';
 import { CorsiService } from '../corsi.service';
 
@@ -10,7 +10,7 @@ import { CorsiService } from '../corsi.service';
   styleUrl: './corso.component.css'
 })
 export class CorsoComponent {
-  corso = input.required<Corsi>();  
+  @Input() corso!: Corsi;
   
   corsi: Corsi[] = [];
   corsiPreferiti: Corsi[] = [];
@@ -26,6 +26,9 @@ export class CorsoComponent {
     this.corsiService.loadCorsiPreferiti().subscribe(() => {
       this.corsiPreferiti = this.corsiService.loadedCorsiPreferiti();
     });
+
+    // Carica gli istruttori
+    this.corsiService.loadIstruttori().subscribe();
   }
 
   preferito(corso: Corsi) {
@@ -37,5 +40,10 @@ export class CorsoComponent {
 
   isPreferito(corso: Corsi): boolean {
     return this.corsiPreferiti.some((c) => c.id === corso.id);
+  }
+
+  getIstruttoreNome(istruttoreId: string): string {
+    const istruttore = this.corsiService.getIstruttoreById(istruttoreId);
+    return istruttore ? istruttore.nome : 'Istruttore non trovato';
   }
 }

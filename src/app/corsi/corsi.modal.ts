@@ -1,11 +1,8 @@
-export interface Corsi{
+export interface Corsi {
     id: string,
     nome: string,
     descrizione: string,
-    istruttore: {
-        nome: string,
-        email: string,
-    },
+    istruttoreId: string,
     durata: string,
     capacitaMassima: number,
     immagine: string,
