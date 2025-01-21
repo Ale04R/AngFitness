@@ -1,9 +1,14 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">{{corso().nome}}</h5>
+        <span (click)="preferito(corso())"
+        [style.color]="isPreferito(corso()) ? 'gold' : 'gray'"
+        style="cursor: pointer; font-size: 1.5rem;">
+            ★
+        </span>
         <p class="card-text"><strong>Descrizione:</strong> {{corso().descrizione}}</p>
         <p class="card-text"><strong>Istruttore:</strong> {{corso().istruttore.nome}}</p>
-        <p class="card-text"><strong>Durata:</strong> {{corso().durata}} minuti</p>
+        <p class="card-text"><strong>Durata:</strong> {{corso().durata}}</p>
         <p class="card-text"><strong>Capacità Massima:</strong> {{corso().capacitaMassima}} persone</p>
         <a href="#" class="btn btn-primary w-100">Prenota</a>
     </div>
