@@ -1,24 +1,36 @@
 <h1 class="text-center m-5">Dashboard</h1>
 
-<div class="filter-container text-center mb-4">
-    <input id="filtro" type="text" class="form-control d-inline-block w-auto" [(ngModel)]="filtro"
-        placeholder="Filtra per idCorso" (ngModelChange)="filtraPrenotazioni()" />
+<div class="text-center">
+    <button class="btn btn-primary me-3" (click)="scrollTo('prenotazioni')"><strong>PRENOTAZIONI</strong></button>
+    <button class="btn btn-secondary ms-3" (click)="scrollTo('corsi')"><strong>CORSI</strong></button>
 </div>
 
-@if(inCaricamento()){
-<div class="text-center">Caricamento corsi in corso...</div>
-}@else{
-<div class="row m-5 justify-content-center">
-    @if(corsiPrenotati()?.length === 0){
-    <div class="alert alert-primary text-center w-100" role="alert">
-        <p class="m-0">Non ci sono prenotazioni disponibili.</p>
+<div id="prenotazioni" class="mt-5">
+    <div class="spacer"></div>
+    <h2 class="text-center mb-4">Prenotazioni</h2>
+    <div class="filter-container text-center mb-4">
+        <input id="filtro" type="text" class="form-control d-inline-block w-auto" [(ngModel)]="filtro"
+            placeholder="Filtra per idCorso" (ngModelChange)="filtraPrenotazioni()" />
     </div>
-    }@else{
-    @for(corsoPrenotato of corsiPrenotati() ?? []; track corsoPrenotato?.id){
-    <div class="col-md-4 mb-4 ">
-        <app-prenotazione class="m-3" [corsoPrenotato]="corsoPrenotato"></app-prenotazione>
-    </div>
-    }
-    }
+        @if(inCaricamento()){
+        <div class="text-center">Caricamento corsi in corso...</div>
+        }@else{
+        <div class="row m-5 justify-content-center">
+            @if(corsiPrenotati()?.length === 0){
+            <div class="alert alert-primary text-center w-100" role="alert">
+                <p class="m-0">Non ci sono prenotazioni disponibili.</p>
+            </div>
+            }@else{
+            @for(corsoPrenotato of corsiPrenotati() ?? []; track corsoPrenotato?.id){
+            <div class="col-md-4 mb-4 ">
+                <app-prenotazione class="m-3" [corsoPrenotato]="corsoPrenotato"></app-prenotazione>
+            </div>
+            }
+            }
+        </div>
+        }
 </div>
-}
+<div id="corsi" class="mt-5">
+    <div class="spacer" style="height: 80px;"></div>
+    <h2 class="text-center mb-4">Corsi</h2>
+</div>
