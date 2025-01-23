@@ -5,7 +5,7 @@ import { CorsiService } from '../corsi.service';
 @Component({
   selector: 'app-corso',
   standalone: true,
-  imports: [ ],
+  imports: [],
   templateUrl: './corso.component.html',
   styleUrl: './corso.component.css'
 })
@@ -46,4 +46,12 @@ export class CorsoComponent {
     const istruttore = this.corsiService.getIstruttoreById(istruttoreId);
     return istruttore ? istruttore.nome : 'Istruttore non trovato';
   }
+
+  prenota(corso: Corsi) {
+    this.corsiService.onPreferito(corso).subscribe(() => {
+      // Aggiorna i corsi preferiti dopo l'operazione
+      this.corsiPreferiti = this.corsiService.loadedCorsiPreferiti();
+    });
+  }
+      
 }

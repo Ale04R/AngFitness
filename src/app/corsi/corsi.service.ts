@@ -73,20 +73,20 @@ export class CorsiService {
 
     loadIstruttori() {
         return this.httpClient.get<any[]>('http://localhost:3000/istruttori')
-            .pipe(
-                tap({
-                    next: (data) => {
-                        this.istruttori.set(data);
+        .pipe(
+            tap({
+                next: (data) => {
+                    this.istruttori.set(data);
+                }
+            }),
+            catchError((error) => {
+                console.log(error);
+                return throwError(
+                    () => {
+                        new Error("Qualcosa è andato storto con il caricamento degli istruttori");
                     }
-                }),
-                catchError((error) => {
-                    console.log(error);
-                    return throwError(
-                        () => {
-                            new Error("Qualcosa è andato storto con il caricamento degli istruttori");
-                        }
-                    )
-                })
-            );
+                )
+            })
+        );
     }
 }
