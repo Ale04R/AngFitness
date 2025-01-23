@@ -10,7 +10,7 @@ import { PrenotazioniService } from './prenotazioni.service';
   standalone: true,
   imports: [CommonModule, FormsModule, PrenotazioneComponent],
   templateUrl: './amministrazione.component.html',
-  styleUrl: './amministrazione.component.css'
+  styleUrls: ['./amministrazione.component.css']
 })
 export class AmministrazioneComponent {
   corsiPrenotati = signal<CorsiPrenotati[] | undefined>(undefined);
