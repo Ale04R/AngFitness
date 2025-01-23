@@ -47,11 +47,11 @@ export class CorsoComponent {
     return istruttore ? istruttore.nome : 'Istruttore non trovato';
   }
 
-  prenota(corso: Corsi) {
-    this.corsiService.onPreferito(corso).subscribe(() => {
-      // Aggiorna i corsi preferiti dopo l'operazione
-      this.corsiPreferiti = this.corsiService.loadedCorsiPreferiti();
-    });
-  }
+  // prenota(corso: Corsi) {
+  //   this.corsiService.onPrenotato(corso).subscribe(() => {
+  //     // Aggiorna i corsi prenotati dopo l'operazione
+  //     this.corsiPrenotati = this.corsiService.loadedCorsiPrenotati();
+  //   });
+  // }
       
 }

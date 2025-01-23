@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, signal } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { catchError, tap, throwError } from "rxjs";
 import { Corsi } from "./corsi.modal";
 
@@ -68,25 +68,27 @@ export class CorsiService {
         if (this.istruttori().length === 0) {
             this.loadIstruttori().subscribe();
         }
+        
+        console.log(this.istruttori().find(istruttore => istruttore.id === istruttoreId));
         return this.istruttori().find(istruttore => istruttore.id === istruttoreId);
     }
 
     loadIstruttori() {
         return this.httpClient.get<any[]>('http://localhost:3000/istruttori')
-        .pipe(
-            tap({
-                next: (data) => {
-                    this.istruttori.set(data);
-                }
-            }),
-            catchError((error) => {
-                console.log(error);
-                return throwError(
-                    () => {
-                        new Error("Qualcosa è andato storto con il caricamento degli istruttori");
+            .pipe(
+                tap({
+                    next: (data) => {
+                        this.istruttori.set(data);
                     }
-                )
-            })
-        );
+                }),
+                catchError((error) => {
+                    console.log(error);
+                    return throwError(
+                        () => {
+                            new Error("Qualcosa è andato storto con il caricamento degli istruttori");
+                        }
+                    )
+                })
+            );
     }
 }
