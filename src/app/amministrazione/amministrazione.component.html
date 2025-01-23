@@ -10,25 +10,34 @@
     <h2 class="text-center mb-4">Prenotazioni</h2>
     <div class="filter-container text-center mb-4">
         <input id="filtro" type="text" class="form-control d-inline-block w-auto" [(ngModel)]="filtro"
-            placeholder="Filtra per idCorso" (ngModelChange)="filtraPrenotazioni()" />
+            placeholder="Filtra per nome del corso" (ngModelChange)="filtraPrenotazioni()" />
     </div>
-        @if(inCaricamento()){
-        <div class="text-center">Caricamento corsi in corso...</div>
+    @if(inCaricamento()){
+    <div class="text-center">Caricamento corsi in corso...</div>
+    }@else{
+    <div class="row m-5 justify-content-center">
+        @if(corsiPrenotati()?.length === 0){
+        <div class="alert alert-primary text-center w-100" role="alert">
+            <p class="m-0">Non ci sono prenotazioni disponibili.</p>
+        </div>
         }@else{
-        <div class="row m-5 justify-content-center">
-            @if(corsiPrenotati()?.length === 0){
-            <div class="alert alert-primary text-center w-100" role="alert">
-                <p class="m-0">Non ci sono prenotazioni disponibili.</p>
+        @for(corsoPrenotato of corsiPrenotati() ?? []; track corsoPrenotato?.id){
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="card-title">{{ getCorsoNome(corsoPrenotato.idCorso) }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Username:</strong> {{ corsoPrenotato.userName }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ corsoPrenotato.email }}</p>
+                    <p class="card-text"><strong>Numero Prenotazioni:</strong> {{ getCorsoCapMax(corsoPrenotato.idCorso, corsoPrenotato.nPrenotazioni) }}</p>
+                </div>
             </div>
-            }@else{
-            @for(corsoPrenotato of corsiPrenotati() ?? []; track corsoPrenotato?.id){
-            <div class="col-md-4 mb-4 ">
-                <app-prenotazione class="m-3" [corsoPrenotato]="corsoPrenotato"></app-prenotazione>
-            </div>
-            }
-            }
         </div>
         }
+        }
+    </div>
+    }
 </div>
 <div id="corsi" class="mt-5">
     <div class="spacer" style="height: 80px;"></div>
