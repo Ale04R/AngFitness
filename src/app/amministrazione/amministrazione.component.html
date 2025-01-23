@@ -1,0 +1,15 @@
+<h1 class="text-center m-5">Dashboard</h1>
+
+@if(inCaricamento()){
+<div>Caricamento corsi in corso....</div>
+}@else{
+
+<div class="m-5 row">
+    @for(corsoPrenotato of corsiPrenotati() ?? []; track corsoPrenotato.id){
+    <div class="col-4 m-auto">
+        <app-prenotazione class="m-3" [corsoPrenotato]="corsoPrenotato"></app-prenotazione>
+    </div>
+    }
+</div>
+
+}

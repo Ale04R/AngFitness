@@ -1,0 +1,7 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">{{ getCorsoNome(corsoPrenotato.idCorso) }}</h5>
+        <p class="card-text"><strong>Email:</strong> {{ corsoPrenotato.email }}</p>
+        <p class="card-text"><strong>Numero Prenotazioni:</strong> {{ getCorsoCapMax(corsoPrenotato.idCorso, corsoPrenotato.nPrenotazioni) }}</p>
+    </div>
+</div>
