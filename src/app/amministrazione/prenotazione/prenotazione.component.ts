@@ -20,12 +20,14 @@ export class PrenotazioneComponent implements OnInit {
     this.prenotazioniService.loadCorsiPrenotati().subscribe((data) => {
       this.corsiPrenotati = data;
     });
+
+    // carica i corsi
+    this.prenotazioniService.loadCorsiPrenotati().subscribe();
   }
 
   getCorsoNome(idCorso: string): string {
-    const corsoPren = this.prenotazioniService.getCorsoById(idCorso);
-    // console.log(corsoPren);
-    return corsoPren ? corsoPren.nome : 'Istruttore non trovato';
+    const corso = this.prenotazioniService.getCorsoById(idCorso);
+    return corso ? corso.nome : 'Corso non trovato';
   }
 
   getCorsoCapMax(idCorso: string, nPrenotazioni: number): string {

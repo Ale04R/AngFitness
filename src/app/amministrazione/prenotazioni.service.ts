@@ -1,8 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { signal } from '@angular/core';
+import { catchError, tap, throwError } from 'rxjs';
 import { CorsiPrenotati } from './prenotazioni.modal';
 
 @Injectable({
@@ -11,51 +9,52 @@ import { CorsiPrenotati } from './prenotazioni.modal';
   
 export class PrenotazioniService {
   private httpClient = inject(HttpClient);
-  private corsiPrenotati = signal<any[]>([]);
+  private corso = signal<any[]>([]);
 
-  getCorsoById(idCorso: string) {
-    if (this.corsiPrenotati().length === 0) {
-      this.loadCorsiPrenotati().subscribe();
-    }
-    return this.corsiPrenotati().find(corsiPrenotati => corsiPrenotati.id === idCorso);
-  }
+  private fetchCorsi(url: string, errorMessage: string){
+    return this.httpClient.get<CorsiPrenotati[]>(url)
+        .pipe(
+            catchError((error) => {
+                console.log(error);
+                return throwError(
+                    () => {
+                        new Error(errorMessage);
+                    }
+                )
+            })
+        )
+      }
 
   loadCorsiPrenotati() {
-    return this.httpClient.get<CorsiPrenotati[]>('http://localhost:3000/corsiPrenotati')
+    return this.fetchCorsi('http://localhost:3000/corsiPrenotati', "Qualcosa è andato storto")
+  }
+
+  getCorsoById(idCorso: string) {
+    if (this.corso().length === 0) {
+      this.loadCorsi().subscribe((data) => {
+        this.corso.set(data);
+      });
+    }
+    console.log(this.corso().find(corso => corso.id === idCorso));
+    return this.corso().find(corso => corso.id === idCorso);
+  }
+
+  loadCorsi() {
+    return this.httpClient.get<any[]>('http://localhost:3000/corsi')
       .pipe(
         tap({
           next: (data) => {
-            this.corsiPrenotati.set(data);
+            this.corso.set(data);
           }
         }),
         catchError((error) => {
           console.log(error);
           return throwError(
-            () => new Error("Qualcosa è andato storto con il caricamento dei corsi prenotati")
-          );
+            () => {
+              new Error("Qualcosa è andato storto con i corsi");
+            }
+          )
         })
       );
-  }
-
-  onPrenotato(corso: CorsiPrenotati) {
-    const isPrenotato = this.corsiPrenotati().some((c) => c.idCorso === corso.idCorso && c.email === corso.email);
-
-    if (isPrenotato) {
-      return this.deletePrenotato(corso);
-    } else {
-      return this.addCorsoPrenotato(corso);
-    }
-  }
-
-  addCorsoPrenotato(corso: CorsiPrenotati) {
-    this.corsiPrenotati.update(prevCorso => [...prevCorso, corso]);
-    return this.httpClient.post('http://localhost:3000/corsiPrenotati', corso);
-  }
-
-  deletePrenotato(corso: CorsiPrenotati) {
-    this.corsiPrenotati.update(
-      corsi => corsi.filter(c => c.idCorso !== corso.idCorso || c.email !== corso.email)
-    );
-    return this.httpClient.delete('http://localhost:3000/corsiPrenotati/' + corso.id);
   }
 }
