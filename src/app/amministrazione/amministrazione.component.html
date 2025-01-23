@@ -42,4 +42,25 @@
 <div id="corsi" class="mt-5">
     <div class="spacer" style="height: 80px;"></div>
     <h2 class="text-center mb-4">Corsi</h2>
+    <div class="text-center mb-4">
+        <!-- <button class="btn btn-success me-3" (click)="addCorso()">Aggiungi Corso</button> -->
+    </div>
+    <div class="row m-5 justify-content-center">
+        @for(corso of corsi() ?? []; track corso?.id){
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white text-center">
+                    <h5 class="card-title">{{ corso.nome }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Descrizione:</strong> {{ corso.descrizione }}</p>
+                    <p class="card-text"><strong>Istruttore:</strong> {{ corso.istruttoreId }}</p>
+                    <p class="card-text"><strong>Durata:</strong> {{ corso.durata }}</p>
+                    <p class="card-text"><strong>Capacità Massima:</strong> {{ corso.capacitaMassima }} persone</p>
+                    <button class="btn btn-danger w-100" (click)="deleteCorso(corso.id)">Elimina</button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
 </div>

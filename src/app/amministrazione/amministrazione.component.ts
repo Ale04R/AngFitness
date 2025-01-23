@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CorsiPrenotati } from './prenotazioni.modal';
 import { PrenotazioniService } from './prenotazioni.service';
+import { CorsiService } from '../corsi/corsi.service';
+import { Corsi } from '../corsi/corsi.modal';
 
 @Component({
   selector: 'app-amministrazione',
@@ -13,11 +15,13 @@ import { PrenotazioniService } from './prenotazioni.service';
 })
 export class AmministrazioneComponent {
   corsiPrenotati = signal<CorsiPrenotati[] | undefined>(undefined);
+  corsi = signal<Corsi[]>([]);
   inCaricamento = signal(false);
   filtro = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
   private prenotazioniService = inject(PrenotazioniService);
+  private corsiService = inject(CorsiService);
 
   ngOnInit(): void {
     const subscription = this.prenotazioniService.loadCorsiPrenotati()
@@ -30,6 +34,10 @@ export class AmministrazioneComponent {
           this.inCaricamento.set(false);
         }
       });
+
+    this.corsiService.loadCorsi().subscribe((data) => {
+      this.corsi.set(data);
+    });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
@@ -74,5 +82,25 @@ export class AmministrazioneComponent {
         behavior: 'smooth'
       });
     }
+  }
+
+  // addCorso() {
+  //   const nuovoCorso: Corsi = {
+  //     id: 'new-id',
+  //     nome: 'Nuovo Corso',
+  //     descrizione: 'Descrizione del nuovo corso',
+  //     istruttoreId: 'istruttore-id',
+  //     durata: '1 ora',
+  //     capacitaMassima: 20
+  //   };
+  //   this.corsiService.addCorso(nuovoCorso).subscribe(() => {
+  //     this.corsi.update(corsi => [...corsi, nuovoCorso]);
+  //   });
+  // }
+
+  deleteCorso(corsoId: string) {
+    this.corsiService.deleteCorso(corsoId).subscribe(() => {
+      this.corsi.update(corsi => corsi.filter(corso => corso.id !== corsoId));
+    });
   }
 }

@@ -9,6 +9,7 @@ import { CorsiPrenotati } from './prenotazioni.modal';
   
 export class PrenotazioniService {
   private httpClient = inject(HttpClient);
+  private prenotazioni = signal<CorsiPrenotati[]>([]);
   private corso = signal<any[]>([]);
 
   private fetchCorsi(url: string, errorMessage: string){
@@ -57,4 +58,9 @@ export class PrenotazioniService {
         })
       );
   }
+
+  prenotazione(prenotazione: CorsiPrenotati) {
+    this.prenotazioni.update(prevCorso => [...prevCorso, prenotazione]);
+    return this.httpClient.post('http://localhost:3000/corsiPrenotati', prenotazione);
+  } 
 }

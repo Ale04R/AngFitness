@@ -10,6 +10,35 @@
         <p class="card-text"><strong>Istruttore:</strong> {{ getIstruttoreNome(corso.istruttoreId) }}</p>
         <p class="card-text"><strong>Durata:</strong> {{ corso.durata }}</p>
         <p class="card-text"><strong>Capacità Massima:</strong> {{ corso.capacitaMassima }} persone</p>
-        <!-- <button class="btn btn-primary w-100" ((click))="prenota(corso)">Prenota</button> -->
+        
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            PRENOTA
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade text-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Prenota il tuo corso di {{ corso.nome }}</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form (ngSubmit)="prenota()">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" aria-describedby="emailHelp">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">INVIA</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

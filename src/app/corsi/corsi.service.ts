@@ -69,7 +69,6 @@ export class CorsiService {
             this.loadIstruttori().subscribe();
         }
         
-        console.log(this.istruttori().find(istruttore => istruttore.id === istruttoreId));
         return this.istruttori().find(istruttore => istruttore.id === istruttoreId);
     }
 
@@ -86,6 +85,34 @@ export class CorsiService {
                     return throwError(
                         () => {
                             new Error("Qualcosa è andato storto con il caricamento degli istruttori");
+                        }
+                    )
+                })
+            );
+    }
+
+    addCorso(corso: Corsi) {
+        return this.httpClient.post('http://localhost:3000/corsi', corso)
+            .pipe(
+                catchError((error) => {
+                    console.log(error);
+                    return throwError(
+                        () => {
+                            new Error("Qualcosa è andato storto con l'aggiunta del corso");
+                        }
+                    )
+                })
+            );
+    }
+
+    deleteCorso(corsoId: string) {
+        return this.httpClient.delete('http://localhost:3000/corsi/' + corsoId)
+            .pipe(
+                catchError((error) => {
+                    console.log(error);
+                    return throwError(
+                        () => {
+                            new Error("Qualcosa è andato storto con l'eliminazione del corso");
                         }
                     )
                 })
