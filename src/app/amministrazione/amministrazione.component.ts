@@ -5,6 +5,8 @@ import { CorsiPrenotati } from './prenotazioni.modal';
 import { PrenotazioniService } from './prenotazioni.service';
 import { CorsiService } from '../corsi/corsi.service';
 import { Corsi } from '../corsi/corsi.modal';
+import { IstruttoriService } from '../chisiamo/istruttore.service';
+import { Istruttori } from '../chisiamo/istruttori.modal';
 
 @Component({
   selector: 'app-amministrazione',
@@ -14,14 +16,16 @@ import { Corsi } from '../corsi/corsi.modal';
   styleUrls: ['./amministrazione.component.css']
 })
 export class AmministrazioneComponent {
-  corsiPrenotati = signal<CorsiPrenotati[] | undefined>(undefined);
+  corsiPrenotati = signal<CorsiPrenotati[]>([]);
   corsi = signal<Corsi[]>([]);
+  istruttori = signal<Istruttori[]>([]);
   inCaricamento = signal(false);
   filtro = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
   private prenotazioniService = inject(PrenotazioniService);
   private corsiService = inject(CorsiService);
+  private istruttoriService = inject(IstruttoriService);
 
   ngOnInit(): void {
     const subscription = this.prenotazioniService.loadCorsiPrenotati()
@@ -39,6 +43,10 @@ export class AmministrazioneComponent {
       this.corsi.set(data);
     });
 
+    this.istruttoriService.loadIstruttori().subscribe((data) => {
+      this.istruttori.set(data);
+    });
+
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
     });
@@ -46,8 +54,8 @@ export class AmministrazioneComponent {
 
   filtraPrenotazioni() {
     const filtroValue = this.filtro().toLowerCase();
-    if (filtroValue && this.corsiPrenotati()) {
-      this.corsiPrenotati.set(this.corsiPrenotati()!.filter(corso => {
+    if (filtroValue && this.corsiPrenotati().length > 0) {
+      this.corsiPrenotati.set(this.corsiPrenotati().filter(corso => {
         const corsoNome = this.getCorsoNome(corso.idCorso).toLowerCase();
         return corsoNome.includes(filtroValue);
       }));
@@ -71,7 +79,7 @@ export class AmministrazioneComponent {
   scrollTo(elementId: string) {
     const element = document.getElementById(elementId);
     if (element) {
-      const offset = -80; // Altezza dello spazio aggiunto
+      const offset = -80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -84,23 +92,13 @@ export class AmministrazioneComponent {
     }
   }
 
-  // addCorso() {
-  //   const nuovoCorso: Corsi = {
-  //     id: 'new-id',
-  //     nome: 'Nuovo Corso',
-  //     descrizione: 'Descrizione del nuovo corso',
-  //     istruttoreId: 'istruttore-id',
-  //     durata: '1 ora',
-  //     capacitaMassima: 20
-  //   };
-  //   this.corsiService.addCorso(nuovoCorso).subscribe(() => {
-  //     this.corsi.update(corsi => [...corsi, nuovoCorso]);
-  //   });
-  // }
-
   deleteCorso(corsoId: string) {
     this.corsiService.deleteCorso(corsoId).subscribe(() => {
       this.corsi.update(corsi => corsi.filter(corso => corso.id !== corsoId));
+      this.prenotazioniService.deletePrenotazioniByCorsoId(corsoId).subscribe(() => {
+        this.corsiPrenotati.update(prenotazioni => prenotazioni.filter(prenotazione => prenotazione.idCorso !== corsoId));
+      });
+      this.prenotazioniService.deletePreferitiByCorsoId(corsoId).subscribe();
     });
   }
 }

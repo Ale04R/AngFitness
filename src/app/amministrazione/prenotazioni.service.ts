@@ -63,4 +63,38 @@ export class PrenotazioniService {
     this.prenotazioni.update(prevCorso => [...prevCorso, prenotazione]);
     return this.httpClient.post('http://localhost:3000/corsiPrenotati', prenotazione);
   } 
+
+  deletePrenotazioniByCorsoId(corsoId: string) {
+    return this.httpClient.get<CorsiPrenotati[]>(`http://localhost:3000/corsiPrenotati?idCorso=${corsoId}`)
+      .pipe(
+        tap((prenotazioni) => {
+          prenotazioni.forEach(prenotazione => {
+            this.httpClient.delete(`http://localhost:3000/corsiPrenotati/${prenotazione.idCorso}`).subscribe();
+          });
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(
+            () => new Error("Qualcosa è andato storto con l'eliminazione delle prenotazioni")
+          );
+        })
+      );
+  }
+
+  deletePreferitiByCorsoId(corsoId: string) {
+    return this.httpClient.get<any[]>(`http://localhost:3000/corsiPreferiti?id=${corsoId}`)
+      .pipe(
+        tap((preferiti) => {
+          preferiti.forEach(preferito => {
+            this.httpClient.delete(`http://localhost:3000/corsiPreferiti/${preferito.id}`).subscribe();
+          });
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(
+            () => new Error("Qualcosa è andato storto con l'eliminazione dei corsi preferiti")
+          );
+        })
+      );
+  }
 }

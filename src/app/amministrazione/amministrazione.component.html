@@ -43,7 +43,54 @@
     <div class="spacer" style="height: 80px;"></div>
     <h2 class="text-center mb-4">Corsi</h2>
     <div class="text-center mb-4">
-        <!-- <button class="btn btn-success me-3" (click)="addCorso()">Aggiungi Corso</button> -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Aggiungi corso
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi corso</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descrizione" class="form-label">Descrizione</label>
+                                <input type="text" class="form-control" id="descrizione">
+                            </div>
+                            <div class="mb-3">
+                                <p class="w-100">Scegli l'istruttore</p>
+                                <div class="justify-content-center">
+                                    @for (istruttore of istruttori() ?? []; track istruttore?.id) {
+                                    <input class="form-check-input m-2" type="radio" name="istruttore" id="istruttore{{istruttore.id}}"
+                                        [value]="istruttore.id">
+                                    <label class="form-check-label" for="istruttore{{istruttore.id}}">{{istruttore.nome}}</label>
+                                    }
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="durata" class="form-label">Durata</label>
+                                <input type="number" class="form-control" id="durata">
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacitaMassima" class="form-label">Capacità Massima</label>
+                                <input type="number" class="form-control" id="capacitaMassima">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="row m-5 justify-content-center">
         @for(corso of corsi() ?? []; track corso?.id){

@@ -1,5 +1,5 @@
 export interface CorsiPrenotati {
-  id: string;
+  id: number;
   userName: string;
   email: string;
   idCorso: string;
