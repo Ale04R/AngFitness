@@ -137,11 +137,11 @@ export class AmministrazioneComponent {
     if (this.form.valid) {
       const nuovoCorso: Corsi = {
         id: this.generateId(),
-        nome: this.form.value.nome || '',
-        descrizione: this.form.value.descrizione || '',
-        durata: this.form.value.durata || '',
-        capacitaMassima: Number(this.form.value.capacita) || 0,
-        istruttoreId: this.form.value.istruttore || '',
+        nome: this.form.value.nome!,
+        descrizione: this.form.value.descrizione!,
+        durata: this.form.value.durata!,
+        capacitaMassima: Number(this.form.value.capacita!),
+        istruttoreId: this.form.value.istruttore!,
       };
 
       this.corsiService.addCorso(nuovoCorso).subscribe(response => {

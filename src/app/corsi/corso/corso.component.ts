@@ -66,8 +66,8 @@ export class CorsoComponent {
     if (this.form.valid) {
       const prenotazione: CorsiPrenotati = {
         id: this.idAttuale,
-        userName: this.form.value.nome || '',
-        email: this.form.value.email || '',
+        userName: this.form.value.nome!,
+        email: this.form.value.email!,
         idCorso: this.corso.id,
         nPrenotazioni: 1,
       };
