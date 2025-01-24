@@ -65,63 +65,8 @@
       "capacitaMassima": 10
     }
   ],
-  "corsiPreferiti": [
-    {
-      "id": "2",
-      "nome": "Pilates Avanzato",
-      "descrizione": "Perfeziona la tua tecnica di pilates con esercizi avanzati per il core e la postura.",
-      "istruttoreId": "2",
-      "durata": "6 settimane",
-      "capacitaMassima": 15
-    },
-    {
-      "id": "2",
-      "nome": "Pilates Avanzato",
-      "descrizione": "Perfeziona la tua tecnica di pilates con esercizi avanzati per il core e la postura.",
-      "istruttoreId": "2",
-      "durata": "6 settimane",
-      "capacitaMassima": 15
-    },
-    {
-      "id": "2",
-      "nome": "Pilates Avanzato",
-      "descrizione": "Perfeziona la tua tecnica di pilates con esercizi avanzati per il core e la postura.",
-      "istruttoreId": "2",
-      "durata": "6 settimane",
-      "capacitaMassima": 15
-    },
-    {
-      "id": "3",
-      "nome": "Allenamento HIIT",
-      "descrizione": "Un corso di allenamento ad alta intensità per bruciare calorie e migliorare la resistenza.",
-      "istruttoreId": "3",
-      "durata": "4 settimane",
-      "capacitaMassima": 25
-    },
-    {
-      "id": "5",
-      "nome": "CrossFit Essentials",
-      "descrizione": "Le basi del CrossFit per migliorare forza, resistenza e agilità.",
-      "istruttoreId": "5",
-      "durata": "10 settimane",
-      "capacitaMassima": 20
-    }
-  ],
+  "corsiPreferiti": [ ],
   "corsiPrenotati": [
-    {
-      "id": "1",
-      "userName": "Mario Rossi",
-      "email": "mario.rossi@mail.com",
-      "idCorso": "2",
-      "nPrenotazioni": 1
-    },
-    {
-      "id": "2",
-      "userName": "Giulia Bianchi",
-      "email": "giulia.bianchi@mail.com",
-      "idCorso": "3",
-      "nPrenotazioni": 2
-    },
     {
       "id": "3",
       "userName": "Luca Verdi",
@@ -135,13 +80,6 @@
       "email": "sara.neri@mail.com",
       "idCorso": "4",
       "nPrenotazioni": 3
-    },
-    {
-      "id": "5",
-      "userName": "Giacomo grigio",
-      "email": "giacomo.grigio@mail.com",
-      "idCorso": "2",
-      "nPrenotazioni": 1
     }
   ],
   "istruttori": [
