@@ -3,21 +3,23 @@ import { Corsi } from '../corsi.modal';
 import { CorsiService } from '../corsi.service';
 import { CorsiPrenotati } from '../../amministrazione/prenotazioni.modal';
 import { PrenotazioniService } from '../../amministrazione/prenotazioni.service';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-corso',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './corso.component.html',
-  styleUrl: './corso.component.css'
+  styleUrls: ['./corso.component.css']
 })
 export class CorsoComponent {
   @Input() corso!: Corsi;
 
-  nome: string = '';
-  email: string = '';
-  
+  form = new FormGroup({
+    nome: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
+
   corsi: Corsi[] = [];
   corsiPreferiti: Corsi[] = [];
 
@@ -61,11 +63,11 @@ export class CorsoComponent {
   }
 
   prenota() {
-    if (this.corso) {
+    if (this.form.valid) {
       const prenotazione: CorsiPrenotati = {
         id: this.idAttuale,
-        userName: this.nome,
-        email: this.email,
+        userName: this.form.value.nome || '',
+        email: this.form.value.email || '',
         idCorso: this.corso.id,
         nPrenotazioni: 1,
       };
@@ -75,8 +77,8 @@ export class CorsoComponent {
           console.log(response);
           this.idAttuale++;
           localStorage.setItem('idAttuale', this.idAttuale.toString());
+          this.form.reset();
         });
     }
   }
-      
 }

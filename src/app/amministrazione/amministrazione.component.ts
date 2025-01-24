@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CorsiPrenotati } from './prenotazioni.modal';
 import { PrenotazioniService } from './prenotazioni.service';
 import { CorsiService } from '../corsi/corsi.service';
@@ -11,7 +11,7 @@ import { Istruttori } from '../chisiamo/istruttori.modal';
 @Component({
   selector: 'app-amministrazione',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './amministrazione.component.html',
   styleUrls: ['./amministrazione.component.css']
 })
@@ -20,12 +20,40 @@ export class AmministrazioneComponent {
   corsi = signal<Corsi[]>([]);
   istruttori = signal<Istruttori[]>([]);
   inCaricamento = signal(false);
-  filtro = signal<string>('');
+  filtro = new FormControl('');
 
   private destroyRef = inject(DestroyRef);
   private prenotazioniService = inject(PrenotazioniService);
   private corsiService = inject(CorsiService);
   private istruttoriService = inject(IstruttoriService);
+
+  form = new FormGroup({
+    nome: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
+    descrizione: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
+    durata: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
+    capacita: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
+    istruttore: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
+  })
 
   ngOnInit(): void {
     const subscription = this.prenotazioniService.loadCorsiPrenotati()
@@ -53,12 +81,15 @@ export class AmministrazioneComponent {
   }
 
   filtraPrenotazioni() {
-    const filtroValue = this.filtro().toLowerCase();
-    if (filtroValue && this.corsiPrenotati().length > 0) {
-      this.corsiPrenotati.set(this.corsiPrenotati().filter(corso => {
-        const corsoNome = this.getCorsoNome(corso.idCorso).toLowerCase();
-        return corsoNome.includes(filtroValue);
-      }));
+    const filtroValue = this.filtro.value?.toLowerCase() || '';
+    if (filtroValue) {
+      this.prenotazioniService.loadCorsiPrenotati().subscribe((data) => {
+        const filteredData = data.filter(corso => {
+          const corsoNome = this.getCorsoNome(corso.idCorso).toLowerCase();
+          return corsoNome.includes(filtroValue);
+        });
+        this.corsiPrenotati.set(filteredData);
+      });
     } else {
       this.prenotazioniService.loadCorsiPrenotati().subscribe((data) => {
         this.corsiPrenotati.set(data);
@@ -100,5 +131,28 @@ export class AmministrazioneComponent {
       });
       this.prenotazioniService.deletePreferitiByCorsoId(corsoId).subscribe();
     });
+  }
+
+  aggiungiCorso() {
+    if (this.form.valid) {
+      const nuovoCorso: Corsi = {
+        id: this.generateId(),
+        nome: this.form.value.nome || '',
+        descrizione: this.form.value.descrizione || '',
+        durata: this.form.value.durata || '',
+        capacitaMassima: Number(this.form.value.capacita) || 0,
+        istruttoreId: this.form.value.istruttore || '',
+      };
+
+      this.corsiService.addCorso(nuovoCorso).subscribe(response => {
+        console.log(response);
+        this.corsi.update(corsi => [...corsi, nuovoCorso]);
+        this.form.reset();
+      });
+    }
+  }
+
+  private generateId(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }

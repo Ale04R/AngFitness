@@ -5,5 +5,4 @@ export interface Corsi {
     istruttoreId: string,
     durata: string,
     capacitaMassima: number,
-    immagine: string,
 }

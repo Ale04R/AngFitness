@@ -25,14 +25,14 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form (ngSubmit)="prenota()">
+                        <form [formGroup]="form" (ngSubmit)="prenota()">
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" [(ngModel)]="nome" name="nome">
+                                <input type="text" class="form-control" id="nome" formControlName="nome">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" aria-describedby="emailHelp">
+                                <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
                             </div>
                             <button type="submit" class="btn btn-primary w-100">INVIA</button>
                         </form>

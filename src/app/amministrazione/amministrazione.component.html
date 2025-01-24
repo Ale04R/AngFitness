@@ -9,8 +9,8 @@
     <div class="spacer"></div>
     <h2 class="text-center mb-4">Prenotazioni</h2>
     <div class="filter-container text-center mb-4">
-        <input id="filtro" type="text" class="form-control d-inline-block w-auto" [(ngModel)]="filtro"
-            placeholder="Filtra per nome del corso" (ngModelChange)="filtraPrenotazioni()" />
+        <input id="filtro" type="text" class="form-control d-inline-block w-auto" [formControl]="filtro"
+            placeholder="Filtra per nome del corso" (input)="filtraPrenotazioni()" />
     </div>
     @if(inCaricamento()){
     <div class="text-center">Caricamento corsi in corso...</div>
@@ -57,32 +57,32 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form [formGroup]="form" (ngSubmit)="aggiungiCorso()">
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome">
+                                <input type="text" class="form-control" id="nome" formControlName="nome">
                             </div>
                             <div class="mb-3">
                                 <label for="descrizione" class="form-label">Descrizione</label>
-                                <input type="text" class="form-control" id="descrizione">
+                                <input type="text" class="form-control" id="descrizione" formControlName="descrizione">
                             </div>
                             <div class="mb-3">
                                 <p class="w-100">Scegli l'istruttore</p>
                                 <div class="justify-content-center">
                                     @for (istruttore of istruttori() ?? []; track istruttore?.id) {
                                     <input class="form-check-input m-2" type="radio" name="istruttore" id="istruttore{{istruttore.id}}"
-                                        [value]="istruttore.id">
+                                        formControlName="istruttore" [value]="istruttore.id">
                                     <label class="form-check-label" for="istruttore{{istruttore.id}}">{{istruttore.nome}}</label>
                                     }
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="durata" class="form-label">Durata</label>
-                                <input type="number" class="form-control" id="durata">
+                                <input type="number" class="form-control" id="durata" formControlName="durata">
                             </div>
                             <div class="mb-3">
                                 <label for="capacitaMassima" class="form-label">Capacità Massima</label>
-                                <input type="number" class="form-control" id="capacitaMassima">
+                                <input type="number" class="form-control" id="capacitaMassima" formControlName="capacita">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
