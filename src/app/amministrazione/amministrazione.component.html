@@ -61,10 +61,20 @@
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text" class="form-control" id="nome" formControlName="nome">
+                                @if(form.controls.nome.invalid && form.controls.nome.touched) {
+                                    <div class="text-danger">
+                                        Nome è richiesto.
+                                    </div>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="descrizione" class="form-label">Descrizione</label>
                                 <input type="text" class="form-control" id="descrizione" formControlName="descrizione">
+                                @if(form.controls.descrizione.invalid && form.controls.descrizione.touched) {
+                                    <div class="text-danger">
+                                        Descrizione è richiesta.
+                                    </div>
+                                }
                             </div>
                             <div class="mb-3">
                                 <p class="w-100">Scegli l'istruttore</p>
@@ -75,14 +85,29 @@
                                     <label class="form-check-label" for="istruttore{{istruttore.id}}">{{istruttore.nome}}</label>
                                     }
                                 </div>
+                                @if(form.controls.istruttore.invalid && form.controls.istruttore.touched) {
+                                    <div class="text-danger">
+                                        Istruttore è richiesto.
+                                    </div>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="durata" class="form-label">Durata</label>
                                 <input type="number" class="form-control" id="durata" formControlName="durata">
+                                @if(form.controls.durata.invalid && form.controls.durata.touched) {
+                                    <div class="text-danger">
+                                        Durata è richiesta.
+                                    </div>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="capacitaMassima" class="form-label">Capacità Massima</label>
                                 <input type="number" class="form-control" id="capacitaMassima" formControlName="capacita">
+                                @if(form.controls.capacita.invalid && form.controls.capacita.touched) {
+                                    <div class="text-danger">
+                                        Capacità Massima è richiesta.
+                                    </div>
+                                }
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
