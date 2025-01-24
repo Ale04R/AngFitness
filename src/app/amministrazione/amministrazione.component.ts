@@ -21,6 +21,7 @@ export class AmministrazioneComponent {
   istruttori = signal<Istruttori[]>([]);
   inCaricamento = signal(false);
   filtro = new FormControl('');
+  selectedCorsoId = signal<string | null>(null);
 
   private destroyRef = inject(DestroyRef);
   private prenotazioniService = inject(PrenotazioniService);
@@ -148,11 +149,40 @@ export class AmministrazioneComponent {
         console.log(response);
         this.corsi.update(corsi => [...corsi, nuovoCorso]);
         this.form.reset();
+        this.closeModal();
       });
     }
   }
 
   private generateId(): string {
     return Math.random().toString(36).substr(2, 9);
+  }
+
+  private closeModal() {
+    const modalElement = document.getElementById('exampleModal');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.setAttribute('aria-hidden', 'true');
+      modalElement.setAttribute('style', 'display: none');
+      document.body.classList.remove('modal-open');
+      const modalBackdrop = document.querySelector('.modal-backdrop');
+      if (modalBackdrop) {
+        modalBackdrop.remove();
+      }
+    }
+  }
+
+  openModal(corsoId: string) {
+    this.selectedCorsoId.set(corsoId);
+    const modalElement = document.getElementById('exampleModal');
+    if (modalElement) {
+      modalElement.classList.add('show');
+      modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.setAttribute('style', 'display: block');
+      document.body.classList.add('modal-open');
+      const modalBackdrop = document.createElement('div');
+      modalBackdrop.className = 'modal-backdrop fade show';
+      document.body.appendChild(modalBackdrop);
+    }
   }
 }
